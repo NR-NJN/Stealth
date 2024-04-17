@@ -5,10 +5,53 @@ using UnityEngine;
 public class Guard : MonoBehaviour
 {
     public Transform path;
-
+    float speed = 5f;
+    float WaitTime = .3f;
+    float TurnSpeed = 90;
     private void Start()
     {
-        
+        Vector3[] waypoints = new Vector3[path.childCount];
+        for (int i =0; i<waypoints.Length; i++)
+        {
+            waypoints[i]= path.GetChild(i).position;
+            waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
+        }
+        StartCoroutine(Follow(waypoints));
+
+    }
+
+    IEnumerator Follow(Vector3[] waypoints)
+    {
+        transform.position = waypoints[0];
+        int targetIndex = 1;
+        Vector3 targetWayPoint = waypoints[targetIndex];
+        transform.LookAt(targetWayPoint);
+
+        while(true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetWayPoint, speed * Time.deltaTime);
+            if (transform.position == targetWayPoint)
+            {
+                targetIndex = (targetIndex+1)%waypoints.Length;
+                targetWayPoint = waypoints[targetIndex];
+                yield return new WaitForSeconds(WaitTime);
+                yield return StartCoroutine(TurnFace(targetWayPoint));
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator TurnFace(Vector3 lookTarget)
+    {
+        Vector3 dirToTarget = (lookTarget - transform.position).normalized;
+        float targetAngle = 90 - Mathf.Atan2(dirToTarget.z, dirToTarget.x)*Mathf.Rad2Deg;
+
+        while(Mathf.Approximately(transform.eulerAngles.y, targetAngle))
+        {
+            float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, TurnSpeed * Time.deltaTime);
+            transform.eulerAngles = Vector3.up * angle;
+            yield return null;
+        }
     }
     private void OnDrawGizmos()
     {
