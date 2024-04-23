@@ -8,8 +8,14 @@ public class Guard : MonoBehaviour
     public float speed = 5f;
     public float WaitTime = .3f;
     float TurnSpeed = 90;
+
+    public Light spotlight;
+    public float viewDistance;
+    float viewAngle;
     private void Start()
     {
+        viewAngle = spotlight.spotAngle;
+
         Vector3[] waypoints = new Vector3[path.childCount];
         for (int i =0; i<waypoints.Length; i++)
         {
@@ -64,6 +70,9 @@ public class Guard : MonoBehaviour
             endPos = pathway.position;
         }
         Gizmos.DrawLine(endPos, startPos);
+
+        Gizmos.color= Color.red;
+        Gizmos.DrawLine(transform.position, transform.forward*viewDistance);
     }
 
 }
