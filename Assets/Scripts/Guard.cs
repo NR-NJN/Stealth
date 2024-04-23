@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class Guard : MonoBehaviour
 {
     public Transform path;
     public float speed = 5f;
     public float WaitTime = .3f;
+    public float timeToSpot = .5f;
     float TurnSpeed = 90;
 
     public Light spotlight;
@@ -16,6 +18,9 @@ public class Guard : MonoBehaviour
     Transform player;
     public LayerMask view;
     Color originalLightColor;
+
+    float viewingAngle;
+    float playerVisibleTime;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -70,12 +75,20 @@ public class Guard : MonoBehaviour
     {
         if (CanSeePlayer())
         {
-            spotlight.color = Color.red;
+            playerVisibleTime += Time.deltaTime;
         }
         else
         {
-            spotlight.color = originalLightColor;
+            playerVisibleTime -= Time.deltaTime;
         }
+        playerVisibleTime = Mathf.Clamp(playerVisibleTime, 0, timeToSpot);
+        spotlight.color = Color.Lerp(originalLightColor, Color.red, playerVisibleTime / timeToSpot);
+
+        //if(playerVisibleTime>=timeToSpot)
+        //{
+            
+        //}
+
     }
     bool CanSeePlayer()
     {
