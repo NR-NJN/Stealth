@@ -224,14 +224,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65330000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.003434916, y: 0.051285226, z: -0.01241025, w: 0.998601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.004153669, y: 1.1099442, z: -0.0013826254}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 975328993}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.32, y: 5.884, z: -1.44}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &65330005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +248,10 @@ MonoBehaviour:
   speed: 5
   WaitTime: 0.3
   spotlight: {fileID: 975328994}
-  viewDistance: 10.06
+  viewDistance: 10
+  view:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &144615815
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +301,7 @@ GameObject:
   - component: {fileID: 286356634}
   - component: {fileID: 286356633}
   - component: {fileID: 286356632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +389,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.39, y: 1.79, z: 6.26}
-  m_LocalScale: {x: -4.9, y: 3.68, z: 3.8}
+  m_LocalScale: {x: 5.92, y: 3.68, z: 3.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -438,7 +441,7 @@ GameObject:
   - component: {fileID: 583353677}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
