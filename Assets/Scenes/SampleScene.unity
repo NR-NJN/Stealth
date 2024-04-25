@@ -247,6 +247,7 @@ MonoBehaviour:
   path: {fileID: 144615816}
   speed: 5
   WaitTime: 0.3
+  timeToSpot: 0.5
   spotlight: {fileID: 975328994}
   viewDistance: 10
   view:
@@ -544,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d193068e3b2a8824fb43d8176259d1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8
   smoothMoveTime: 0.1
 --- !u!54 &583353677
 Rigidbody:

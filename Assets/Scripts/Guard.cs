@@ -5,6 +5,8 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class Guard : MonoBehaviour
 {
+    public static event System.Action OnGuardSpot;
+
     public Transform path;
     public float speed = 5f;
     public float WaitTime = .3f;
@@ -84,10 +86,13 @@ public class Guard : MonoBehaviour
         playerVisibleTime = Mathf.Clamp(playerVisibleTime, 0, timeToSpot);
         spotlight.color = Color.Lerp(originalLightColor, Color.red, playerVisibleTime / timeToSpot);
 
-        //if(playerVisibleTime>=timeToSpot)
-        //{
-            
-        //}
+        if(playerVisibleTime>=timeToSpot)
+        {
+            if(OnGuardSpot!=null)
+            {
+                OnGuardSpot();
+            }
+        }
 
     }
     bool CanSeePlayer()
