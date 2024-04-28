@@ -11,6 +11,7 @@ public class GameUI : MonoBehaviour
     void Start()
     {
         Guard.OnGuardSpot += showGameOverUI;
+        FindObjectOfType<Player>().OnReachedEndOfLevel += showGameWinUI;
     }
 
     
@@ -40,5 +41,6 @@ public class GameUI : MonoBehaviour
         gameLoseUI.SetActive(true);
         gameIsOver = true;
         Guard.OnGuardSpot -= showGameOverUI;
+        FindObjectOfType<Player>().OnReachedEndOfLevel -= showGameWinUI;
     }
 }

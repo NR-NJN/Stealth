@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public event System.Action OnReachedEndOfLevel;
+
     public float speed = 5;
     public float smoothMoveTime = .1f;
 
@@ -39,6 +41,18 @@ public class Player : MonoBehaviour
         angle = Mathf.LerpAngle(angle, lookAngle, Time.deltaTime*turnSpeed*inputMag);
 
         velocity = transform.forward * speed * smoothInpMag;
+    }
+
+    void OnTriggerEnter(Collider hitCollider)
+    {
+        if(hitCollider.tag=="Finish")
+        {
+            Disable();
+            if(OnReachedEndOfLevel!=null)
+            {
+                OnReachedEndOfLevel();
+            }
+        }
     }
 
     private void Disable()
