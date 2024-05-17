@@ -32,10 +32,27 @@ public static class Noise
                     float perlinValue = Mathf.PerlinNoise(sampleW, sampleH) * 2 - 1; // Value between -1.0 and 1.0.
                     noiseHeight += perlinValue*amplitude;
                 }
+                if(noiseHeight > maxNoiseHeight)
+                {
+                    maxNoiseHeight = noiseHeight;
+                }
+
+                if(noiseHeight < minNoiseHeight)
+                {
+                    minNoiseHeight = noiseHeight;
+                }
                 noiseMap[y, x] = noiseHeight;
+
+            }
+        }
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
             }
         }
 
-        return noiseMap;
+                return noiseMap;
     }
 }
